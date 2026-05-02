@@ -9,7 +9,10 @@ environment:
   sdk: '>=3.10.0 <4.0.0'
 
 dependencies:
-  arcane_jaspr: ^3.1.0
+  arcane_jaspr:
+    git:
+      url: https://github.com/LahaLuhem/arcane_jaspr.git
+      ref: master
   jaspr: '>=0.22.1 <1.0.0'
 
 dev_dependencies:
