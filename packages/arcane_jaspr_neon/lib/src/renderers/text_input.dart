@@ -105,7 +105,10 @@ class NeonTextInput extends StatelessComponent {
         if (props.onSubmit != null)
           'keydown': (e) {
             dynamic event = e;
-            if (event?.key == 'Enter') {
+            if (event?.key == 'Enter' && event?.isComposing != true) {
+              // Prevent the browser's implicit form submission so the
+              // surrounding <form> doesn't also fire its onSubmit.
+              event.preventDefault();
               dynamic target = e.target;
               String? valueStr = target?.value;
               if (valueStr != null) {
@@ -243,7 +246,12 @@ class NeonTextInput extends StatelessComponent {
                   if (props.onSubmit != null)
                     'keydown': (e) {
                       dynamic event = e;
-                      if (event?.key == 'Enter') {
+                      if (event?.key == 'Enter' &&
+                          event?.isComposing != true) {
+                        // Prevent the browser's implicit form submission so
+                        // the surrounding <form> doesn't also fire its
+                        // onSubmit.
+                        event.preventDefault();
                         dynamic target = e.target;
                         String? valueStr = target?.value;
                         if (valueStr != null) {

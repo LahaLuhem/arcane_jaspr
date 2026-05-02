@@ -133,7 +133,10 @@ class ShadcnTextInput extends StatelessComponent {
         if (props.onSubmit != null)
           'keydown': (e) {
             final dynamic event = e;
-            if (event?.key == 'Enter') {
+            if (event?.key == 'Enter' && event?.isComposing != true) {
+              // Prevent the browser's implicit form submission so the
+              // surrounding <form> doesn't also fire its onSubmit.
+              event.preventDefault();
               final dynamic target = e.target;
               final String? valueStr = target?.value;
               if (valueStr != null) {
@@ -280,7 +283,12 @@ class ShadcnTextInput extends StatelessComponent {
                   if (props.onSubmit != null)
                     'keydown': (e) {
                       final dynamic event = e;
-                      if (event?.key == 'Enter') {
+                      if (event?.key == 'Enter' &&
+                          event?.isComposing != true) {
+                        // Prevent the browser's implicit form submission so
+                        // the surrounding <form> doesn't also fire its
+                        // onSubmit.
+                        event.preventDefault();
                         final dynamic target = e.target;
                         final String? valueStr = target?.value;
                         if (valueStr != null) {
